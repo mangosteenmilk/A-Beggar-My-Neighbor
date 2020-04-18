@@ -72,18 +72,80 @@ public class DriverV2 {
 			
 				while(playerTurn) { //while player turn is true
 					System.out.println("\t\t\t\t\t\tPlayer Turn");
-					
-					playerCard = playerDeck.peek();
-					
+					playerCard = playerDeck.peek();						//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
 					System.out.println("Player Card: " + playerCard);
 					
+					
+					
+					
+					while(counter) {									//while counter is true, flip the amount of cards needed to try and trump face card
+						if(playerCard.getRank() > 10) {
+							counter = false;
+							break;
+						}
+						int faceCardRank = centerDeck.getFirst().getRank();
+						int loop =0;
+						switch(faceCardRank) {
+							case 11:
+								loop = 1;
+								break;
+							case 12:
+								loop = 2;
+								break;
+							case 13:
+								loop = 3;
+								break;
+							case 14:
+								loop = 4;
+								break;
+						}
+						System.out.println("Time to loop: " + loop);
+						System.out.println("Player Card: " + playerCard.getRank());
+						
+						for(int i = 0; i>loop;i++) {
+							if(playerCard.getRank() <= 10) {						//if card drawn is not a face card
+								centerDeck.addFirst(playerCard); 				//adding player card to deck
+								System.out.println("Center Deck: " + centerDeck.peek() + "\t\tSize: " + centerDeck.size());
+
+								playerDeck.remove();							//remove card from OG deck
+								playerCard = playerDeck.peek();					//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
+							}else {
+							counter = false;
+							break;
+							
+							
+							}//end of if else statement
+						}//end of for loop
+						
+						
+						
+						if(playerCard.getRank() <= 10) { //drawn x amount of cards to try and trump face card, but has failed, the center deck goes to opponents deck
+							centerDeck.addFirst(playerCard);		//add card to center deck
+							playerDeck.remove(playerCard);			//remove card from OG deck
+							cpuDeck.addAll(centerDeck);				//add center deck to opponents deck
+							counter = false;						//set counter to false
+						}
+					}//end of while counter is true loop
+					
+					
+					
+					
+					
+					
+					//perfect do not touch below
+					if(!counter) {
 					centerDeck.addFirst(playerCard); 		//adding player card to deck
 					
 					System.out.println("Center Deck: " + centerDeck.peek() + " Size: " + centerDeck.size());
 
 					System.out.println("Removed from Player Deck: " +playerDeck.remove());
+					}
 					
 					
+					if(playerCard.getRank() > 10 ) { 		//if player card is a face card then turn counter to true
+						
+						counter = true;
+					}
 					
 					playerTurn = false;			//switch turns
 					cpuTurn = true;
@@ -100,16 +162,92 @@ public class DriverV2 {
 					cpuCard = cpuDeck.peek();
 					
 					System.out.println("CPU Card: " + cpuCard);
+
 					
-					centerDeck.addFirst(cpuCard); 		//adding player card to deck
+					
+					
+					while(counter) {			//while counter is true, flip the amount of cards needed to try and trump face card
+
+						if(cpuCard.getRank() > 10) {
+							counter = false;
+							break;
+						}
+						
+						int faceCardRank = centerDeck.getFirst().getRank();
+						int loop =0;
+						
+						switch(faceCardRank) {
+						case 11:
+							loop = 1;
+							break;
+						case 12:
+							loop = 2;
+							break;
+						case 13:
+							loop = 3;
+							break;
+						case 14:
+							loop = 4;
+							break;
+					}
+						
+						
+						
+						
+						for(int i = 0; i>loop;i++) {
+							System.out.print("i: " + i);
+							if(cpuCard.getRank() <= 10) {				//if card drawn is not a face card
+								centerDeck.addFirst(cpuCard); 		//adding player card to deck
+								cpuDeck.remove();					//remove card from OG deck
+								cpuCard = cpuDeck.peek();			//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
+							}else {
+							counter = false;
+							break;
+							}//end of if else statement
+						}//end of for loop
+						
+						//if counter is still true and have drawn x amount of cards to try and trump face card, but has failed, the center deck goes to opponents deck
+						if(cpuCard.getRank() <= 10) {
+							
+							centerDeck.addFirst(cpuCard);		//add card to center deck
+							cpuDeck.remove(cpuCard);			//remove card from OG deck
+							
+							playerDeck.addAll(centerDeck);				//add center deck to opponents deck
+							
+							counter = false;						//set counter to false
+						}
+						
+					}//end of while counter is true loop
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					///perfect do not touch below
+					if(!counter) {
+
+					centerDeck.addFirst(cpuCard); 		//adding cpu card to deck
 					
 					System.out.println("Center Deck: " + centerDeck.peek() + " Size: " + centerDeck.size());
 
 					System.out.println("Removed from CPU Deck: " +cpuDeck.remove());
+					}
 					
-					
-					
-					
+					if(cpuCard.getRank() > 10 ) { 		//if player card is a face card then turn counter to true
+						
+						counter = true;
+					}
 					
 					cpuTurn = false;			//switch turns
 					playerTurn = true;
@@ -134,8 +272,37 @@ public class DriverV2 {
 	}//end of main 	
 	
 	
+	public int tryFaceCard() {
+		
+		return 0;
+	}
+	
+	public int findLoop(int number) {
+		int numberLoop = 0;
+		switch(number) {
+			case 11:
+				numberLoop = 1;
+				break;
+			case 12:
+				numberLoop = 2;
+				break;
+			case 13:
+				numberLoop = 3;
+				break;
+			case 14:
+				numberLoop = 4;
+				break;
+		}
+		return numberLoop;
+	}
+	
+	
+	
 	
 }//end of driver
+
+
+
 
 
 

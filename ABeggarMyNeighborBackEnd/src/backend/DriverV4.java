@@ -1,17 +1,16 @@
 package backend;
-//DriverV3 works with user input to filp for computer and player
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
+//DriverV4 Works perfectly, does not need player to flip for computer
 
-
-public class DriverV3 {
+public class DriverV4{
 
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		ArrayList<Card> deckOfCards = new ArrayList<Card>(52);
 		Deque<Card> playerDeck = new LinkedList<Card>();
@@ -74,10 +73,7 @@ public class DriverV3 {
 			
 				while(playerTurn) { 									//while player turn is true
 					System.out.println("\n\n\t\t\t\t\tPlayer Turn --------------------------------------------------");
-					System.out.println("\t\t\t\t\tCenter Deck Size: " + centerDeck.size());
-					System.out.println("\t\t\t\t\tBefore Player Deck Size: " + playerDeck.size());
-					System.out.println("\t\t\t\t\tBefore CPU Deck Size: " + cpuDeck.size());
-				
+					
 					
 					int loop = 0;
 					int cardRank = cpuCard.getRank();				//get rank of the opponents to determine how many tries are allowed to counter face card
@@ -103,8 +99,6 @@ public class DriverV3 {
 						inputFlip = scan.next();
 						}else {
 							System.out.println("CPU has played a face card! " +cardRank + " You get "+loop+ " flips to counter them!");
-
-
 						}
 					playerCard = playerDeck.peek();						//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
 
@@ -112,17 +106,20 @@ public class DriverV3 {
 						winnerDecided = true;					
 						playerTurn = false;
 						cpuTurn = false;
+						System.out.println("No cards in deck to draw from!");
 						break;
 					}
 					
 					
 					while(counter) {
+						System.out.println("to counter the face card, press f to flip !");
+						inputFlip = scan.next();
 						if(playerCard.getRank() > 10) {
 							centerDeck.addFirst(playerDeck.remove());
 							counter = false;
 							break;
 						}else if(playerCard.getRank() <= 10) {
-							for(int i = 0; i < loop; i++) {
+							for(int i = 0; i < loop-1; i++) {
 								
 								playerCard = playerDeck.peek();
 								if(playerCard == null) {							//if card is null then break from while loop and decide the winner
@@ -130,15 +127,17 @@ public class DriverV3 {
 									playerTurn = false;
 									cpuTurn = false;
 									System.out.println("No cards in deck to draw from!");
+
 									break;
 								}else if(playerCard.getRank() > 10) {
 									centerDeck.addFirst(playerDeck.remove());
 									counter = false;
 									System.out.println("A face card has been drawn to trump previous face card!" + centerDeck.peek());
+
 									break;
 								}else if(playerCard.getRank() <= 10) {
 									centerDeck.addFirst(playerDeck.remove());
-									System.out.println("A face card was not drawn" + centerDeck.peek());
+									System.out.println("A face card was not drawn " + centerDeck.peek());
 								}
 								
 								System.out.println("to counter the face card, press f to flip !");
@@ -148,7 +147,7 @@ public class DriverV3 {
 
 						}
 						
-						if(playerCard.getRank() < 10) {                            //if OG card is still not a face card then give opponent the center deck
+						if(playerCard.getRank() <= 10) {                            //if OG card is still not a face card then give opponent the center deck
                             System.out.println("Could not counter the face card so these cards: " + centerDeck + "\nWill be added to CPU's Deck");
                             cpuDeck.addAll(centerDeck);
                             centerDeck.clear();
@@ -169,10 +168,8 @@ public class DriverV3 {
 					centerDeck.addFirst(playerDeck.remove()); 		//adding card from current deck to center deck
 					
 					
-					System.out.println("\t\t\t\t\tPlayer Card: " + playerCard);
-					System.out.println("\t\t\t\t\tCenter Deck Size: " + centerDeck.size());
-					System.out.println("\t\t\t\t\tAfter Player Deck Size: " + playerDeck.size());
-					System.out.println("\t\t\t\t\tAfter CPU Deck Size: " + cpuDeck.size());
+					System.out.println("\t\t\t\t\t[[[Player Card: " + playerCard);
+					
 				
 					
 					playerTurn =false;
@@ -184,10 +181,6 @@ public class DriverV3 {
 
 				while(cpuTurn) { //while cpu turn is true
 					System.out.println("\n\n\t\t\t\t\tCPU Turn --------------------------------------------------");
-					System.out.println("Center Deck Size: " + centerDeck.size());
-					System.out.println("\t\t\t\t\tBefore Player Deck Size: " + playerDeck.size());
-					System.out.println("\t\t\t\t\tBefore CPU Deck Size: " + cpuDeck.size());
-					
 					
 					int loop = 0;
 					int cardRank = playerCard.getRank();				//get rank of the opponents to determine how many tries are allowed to counter face card
@@ -206,17 +199,6 @@ public class DriverV3 {
 								break;
 							}
 			
-					
-					if(!counter) {
-					System.out.println("press f to flip");
-					inputFlip = scan.next();
-					}else {
-						System.out.println("Player has played a face card! " +cardRank + " You get "+loop+ " flips to counter them!");
-
-					}
-					
-					
-					
 					
 					cpuCard = cpuDeck.peek();						//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
 
@@ -245,27 +227,29 @@ public class DriverV3 {
 									winnerDecided = true;					
 									playerTurn = false;
 									cpuTurn = false;
-									System.out.println("No cards in deck to draw from!");
+						            Thread.sleep(1000);
+									System.out.println("CPU has no cards in deck to draw from!");
 									break;
 								}else if(cpuCard.getRank() > 10) {
 									centerDeck.addFirst(cpuDeck.remove());
 									counter = false;
-									System.out.println("A face card has been drawn to trump previous face card!" + centerDeck.peek());
+						            Thread.sleep(1000);
+									System.out.println("CPU has drawn a face card to trump players face card!" + centerDeck.peek());
 									break;
 								}else if(cpuCard.getRank() <= 10) {
 									centerDeck.addFirst(cpuDeck.remove());
-									System.out.println("A face card was not drawn" + centerDeck.peek());
+						            Thread.sleep(1000);
+									System.out.println("CPU has not drawn a face card " + centerDeck.peek());
 
 								}
 								
-								System.out.println("to counter the face card, press f to flip !");
-								inputFlip = scan.next();
+								
 								
 							}
 							counter = false;
 						}
 						
-						if(cpuCard.getRank() < 10) {                            //if OG card is still not a face card then give opponent the center deck
+						if(cpuCard.getRank() <= 10) {                            //if OG card is still not a face card then give opponent the center deck
                             System.out.println("Could not counter the face card so these cards: " + centerDeck + "\nWill be added to player's Deck");
                             playerDeck.addAll(centerDeck);
                             centerDeck.clear();
@@ -284,11 +268,8 @@ public class DriverV3 {
 					centerDeck.addFirst(cpuDeck.remove()); 		//adding card from current deck to center deck
 					
 					
-					System.out.println("\t\t\t\t\tCPU Card: " + cpuCard);
-					System.out.println("\t\t\t\t\tCenter Deck Size: " + centerDeck.size());
-					System.out.println("\t\t\t\t\tAfter Player Deck Size: " + playerDeck.size());
-					System.out.println("\t\t\t\t\tAfter CPU Deck Size: " + cpuDeck.size());
-				
+					System.out.println("\t\t\t\t\t[[[CPU Card: " + cpuCard);
+					
 					cpuTurn = false;
 					playerTurn =true;
 

@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.Random;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
@@ -16,6 +17,10 @@ public class DriverV3 {
 		Deque<Card> playerDeck = new LinkedList<Card>();
 		Deque<Card> cpuDeck = new  LinkedList<Card>();
 		Deque<Card> centerDeck = new LinkedList<Card>();
+		
+		
+		String inputFlip;
+		Scanner scan = new Scanner(System.in);
 		
 		Random rand = new Random();
 		Card playerCard = new Card(0, "");
@@ -61,14 +66,15 @@ public class DriverV3 {
 		
 		System.out.println("Player Deck Size: " + playerDeck.size());
 		System.out.println("CPU Deck Size: " + cpuDeck.size());
-		System.out.println("Turn decider: " + turnDecider);
+		System.out.println("Turn decider 0 = player, 1 = CPU: " + turnDecider);
 		
 		
 		while(!winnerDecided) {
 	
 			
 				while(playerTurn) { 									//while player turn is true
-					System.out.println("\n\n\t\t\t\t\tPlayer Turn");
+					System.out.println("\n\n\t\t\t\t\tPlayer Turn --------------------------------------------------");
+					System.out.println("\t\t\t\t\tCenter Deck Size: " + centerDeck.size());
 					System.out.println("\t\t\t\t\tBefore Player Deck Size: " + playerDeck.size());
 					System.out.println("\t\t\t\t\tBefore CPU Deck Size: " + cpuDeck.size());
 				
@@ -82,19 +88,117 @@ public class DriverV3 {
 						break;
 					}
 					
+//					
+//					while(counter) {
+//						int loop = 0;
+//						int cardRank = cpuCard.getRank();				//get rank of the opponents to determine how many tries are allowed to counter face card
+//								switch(cardRank) {
+//								case 11:
+//									loop = 1;
+//									break;
+//								case 12:
+//									loop = 2;
+//									break;
+//								case 13:
+//									loop = 3;
+//									break;
+//								case 14:
+//									loop = 4;
+//									break;
+//								}
+//						
+//						if(playerCard.getRank() > 10) {
+//							centerDeck.add(playerDeck.remove());
+//							counter = false;
+//							break;
+//						}else if(playerCard.getRank() <= 10) {
+//							for(int i = 0; i < loop; i++) {
+//								playerCard = playerDeck.peek();
+//								if(playerCard == null) {							//if card is null then break from while loop and decide the winner
+//									winnerDecided = true;					
+//									playerTurn = false;
+//									cpuTurn = false;
+//									break;
+//								}else if(playerCard.getRank() > 10) {
+//									centerDeck.add(playerDeck.remove());
+//									counter = false;
+//									break;
+//								}else if(playerCard.getRank() <= 10) {
+//									centerDeck.add(playerDeck.remove());
+//								}
+//								
+//							}
+//						}
+//						
+//						
+//						
+//					}//end of while loop 
 					
+					
+					while(counter) {
+						int loop = 0;
+						int cardRank = cpuCard.getRank();				//get rank of the opponents to determine how many tries are allowed to counter face card
+								switch(cardRank) {
+								case 11:
+									loop = 1;
+									break;
+								case 12:
+									loop = 2;
+									break;
+								case 13:
+									loop = 3;
+									break;
+								case 14:
+									loop = 4;
+									break;
+								}
+						
+						System.out.println("loop" + loop);
+						for(int i = 1; i<=loop; i++) {
+							playerCard = playerDeck.peek();						//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
+							if(playerCard == null) {							//if card is null then break from while loop and decide the winner
+								winnerDecided = true;					
+								playerTurn = false;
+								cpuTurn = false;
+								break;
+							}
+							
+							
+
+							if(playerCard.getRank() > 10) {						//if card is a face card 
+								centerDeck.addFirst(playerDeck.remove());		//add card from current deck to center deck
+								counter = false;
+								break;
+							}else if(playerCard.getRank() <= 10) {
+								centerDeck.addFirst(playerDeck.remove());		//add card from current deck to center deck
+							}
+						}
+						
+						
+						if(playerCard.getRank() < 10) {							//if OG card is still not a face card then give opponent the center deck
+							System.out.println("Removed from Center Deck to CPU: " + centerDeck);
+							cpuDeck.addAll(centerDeck);
+							centerDeck.clear();
+							counter = false;
+						}
+					}//end of while loop 
+					
+					
+					
+					
+					
+					///
+					
+					if(playerCard.getRank() > 10) {					//if current card is face card, counter is true
+						counter = true;
+					}
+					
+					
+					centerDeck.addFirst(playerDeck.remove()); 		//adding card from current deck to center deck
 					
 					
 					System.out.println("Player Card: " + playerCard);
-					
-					centerDeck.addFirst(playerCard); 		//adding player card to deck
-					
 					System.out.println("Center Deck Size: " + centerDeck.size());
-
-					System.out.println("Removed from Player Deck: " + playerDeck.remove());
-					
-					
-					
 					System.out.println("\t\t\t\t\tAfter Player Deck Size: " + playerDeck.size());
 					System.out.println("\t\t\t\t\tAfter CPU Deck Size: " + cpuDeck.size());
 				
@@ -107,7 +211,8 @@ public class DriverV3 {
 					
 
 				while(cpuTurn) { //while cpu turn is true
-					System.out.println("\n\n\t\t\t\t\tCPU Turn");
+					System.out.println("\n\n\t\t\t\t\tCPU Turn --------------------------------------------------");
+					System.out.println("Center Deck Size: " + centerDeck.size());
 					System.out.println("\t\t\t\t\tBefore Player Deck Size: " + playerDeck.size());
 					System.out.println("\t\t\t\t\tBefore CPU Deck Size: " + cpuDeck.size());
 				
@@ -120,24 +225,72 @@ public class DriverV3 {
 						cpuTurn = false;
 						break;
 					}
-					
-					
-					
-					
-					System.out.println("CPU Card: " + cpuCard);
-					
-					centerDeck.addFirst(cpuCard); 		//adding player card to deck
-					
-					System.out.println("Center Deck Size: " + centerDeck.size());
+					//
+					while(counter) {
+						int loop = 0;
+						int cardRank = playerCard.getRank();				//get rank of the opponents to determine how many tries are allowed to counter face card
+								switch(cardRank) {
+								case 11:
+									loop = 1;
+									break;
+								case 12:
+									loop = 2;
+									break;
+								case 13:
+									loop = 3;
+									break;
+								case 14:
+									loop = 4;
+									break;
+								}
+						
+						System.out.println("loop" + loop);
+						for(int i = 1; i<=loop; i++) {
+							cpuCard = cpuDeck.peek();						//put try catch here later, if no card in deck the catch the exception and change winnerDecided to true
+							if(cpuCard == null) {							//if card is null then break from while loop and decide the winner
+								winnerDecided = true;					
+								playerTurn = false;
+								cpuTurn = false;
+								break;
+							}
+							
+							
+							System.out.println("for loop card: " + cpuCard);
 
-					System.out.println("Removed from CPU Deck: " + cpuDeck.remove());
+							if(cpuCard.getRank() > 10) {						//if card is a face card 
+								centerDeck.addFirst(cpuDeck.remove());		//add card from current deck to center deck
+								counter = false;
+								break;
+							}else if(cpuCard.getRank() <= 10) {
+								centerDeck.addFirst(cpuDeck.remove());		//add card from current deck to center deck
+							}
+						}
+						
+						
+						if(cpuCard.getRank() < 10) {							//if OG card is still not a face card then give opponent the center deck
+							System.out.println("Removed from Center Deck to CPU: " + centerDeck);
+							playerDeck.addAll(centerDeck);
+							centerDeck.clear();
+							counter = false;
+						}
+					}//end of while loop 
+					
+
+					
+					//
+					if(cpuCard.getRank() > 10) {					//if current card is face card, counter is true
+						counter = true;
+					}
 					
 					
+					centerDeck.addFirst(cpuDeck.remove()); 		//adding card from current deck to center deck
 					
+					
+					System.out.println("Player Card: " + playerCard);
+					System.out.println("Center Deck Size: " + centerDeck.size());
 					System.out.println("\t\t\t\t\tAfter Player Deck Size: " + playerDeck.size());
 					System.out.println("\t\t\t\t\tAfter CPU Deck Size: " + cpuDeck.size());
-					
-					
+				
 					cpuTurn = false;
 					playerTurn =true;
 

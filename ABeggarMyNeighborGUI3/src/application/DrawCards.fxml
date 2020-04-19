@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DrawCardsController">
+   <children>
+      <Pane layoutY="1.0" prefHeight="500.0" prefWidth="650.0">
+         <children>
+            <Label fx:id="labelStatus" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="426.0" layoutY="161.0" prefHeight="180.0" prefWidth="192.0" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Book Antiqua Bold" size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="playersCard" arcHeight="10.0" arcWidth="5.0" fill="#f8f8f8" height="135.0" layoutX="270.0" layoutY="342.0" stroke="BLACK" strokeType="OUTSIDE" width="95.0" />
+            <Rectangle fx:id="centerCard" arcHeight="10.0" arcWidth="5.0" fill="#f8f8f8" height="135.0" layoutX="270.0" layoutY="183.0" stroke="BLACK" strokeType="OUTSIDE" width="95.0" />
+            <Rectangle fx:id="compCard" arcHeight="10.0" arcWidth="5.0" fill="#f8f8f8" height="135.0" layoutX="270.0" layoutY="25.0" stroke="BLACK" strokeType="OUTSIDE" width="95.0" />
+            <Rectangle fx:id="deck" arcHeight="10.0" arcWidth="5.0" fill="#f8f8f8" height="135.0" layoutX="36.0" layoutY="184.0" stroke="BLACK" strokeType="OUTSIDE" width="95.0" />
+            <Button fx:id="buttonLeafCenterDeck" layoutX="297.0" layoutY="226.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="40.0" text="  " />
+            <Button fx:id="buttonHeartCenterDeck" layoutX="297.0" layoutY="225.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="40.0" text="  " />
+            <Button fx:id="buttonHeartArrowCenterDeck" layoutX="297.0" layoutY="225.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="40.0" text="  " />
+            <Button fx:id="buttonDiamondCenterDeck" layoutX="297.0" layoutY="225.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="40.0" text="  " />
+            <Label fx:id="centerDeckBottomNumber" layoutX="346.0" layoutY="297.0" text="A">
+               <font>
+                  <Font name="Book Antiqua Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="centerDeckTopNumber" layoutX="272.0" layoutY="183.0" text="A">
+               <font>
+                  <Font name="Book Antiqua Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="play" layoutX="257.0" layoutY="196.0" mnemonicParsing="false" onAction="#handlePlay" text="Play">
+               <font>
+                  <Font name="Book Antiqua Bold" size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="deal" layoutX="163.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleDeal" text="Deal">
+               <font>
+                  <Font name="Book Antiqua Bold" size="20.0" />
+               </font>
+            </Button>
+            <Label fx:id="flipCardLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="76.0" layoutY="366.0" prefHeight="69.0" prefWidth="173.0" text="Flip the card!" textFill="WHITE" />
+            <Button fx:id="flip" layoutX="391.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleFlip" text="Flip" />
+            <Label fx:id="winnerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="17.0" prefHeight="127.0" prefWidth="224.0" text="Player Wins!!" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Book Antiqua Bold" size="48.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="0.24761904761904763" startX="0.05238095238095238" startY="0.06666666666666667">
+                     <stops>
+                        <Stop color="#281b18" />
+                        <Stop color="WHITE" offset="0.3180076628352486" />
+                        <Stop color="#e1e1e1" offset="0.46668246632697397" />
+                        <Stop color="WHITE" offset="0.5782675672473042" />
+                        <Stop color="BLACK" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <effect>
+                  <Glow />
+               </effect></Label>
+            <Button fx:id="helpButton" layoutX="259.0" layoutY="274.0" mnemonicParsing="false" onAction="#handleHelpButton" text="How To Play">
+               <font>
+                  <Font name="Book Antiqua Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="flipCounter" layoutX="391.0" layoutY="374.0" mnemonicParsing="false" text="Flip" />
+            <Label fx:id="cpuDeckSize" layoutX="380.0" layoutY="24.0" prefHeight="23.0" prefWidth="120.0" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="playerDeckSize" layoutX="376.0" layoutY="455.0" prefHeight="23.0" prefWidth="120.0" textFill="WHITE">
+               <font>
+                  <Font name="Book Antiqua Bold" size="12.0" />
+               </font>
+            </Label>
+                    
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

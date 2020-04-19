@@ -1,0 +1,50 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root{
+    -fx-background-image: url("/images/greenbg.jpg");
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+        
+    
+}
+#buttonHeartCenterDeck{
+	-fx-shape: "M 300 450 Q 200 400 200 300 A 50 50 0 1 1 300 300 A 50 50 0 1 1 400 300 Q 400 400 300 450 ";
+	-fx-background-color: red; 
+}
+
+#buttonLeafCenterDeck{
+	-fx-shape: "M 300 300 A 50 50 0 1 1 300 300 A 50 50 0 1 1 300 300 A 50 50 0 1 1 300 200 A 50 50 0 1 1 300 300 L 300 300 A 50 50 0 1 1 300 350 A 50 50 0 1 1 300 300 Q 300 350 300 350 L 300 400 L 300 350 Q 300 400 350 400 L 250 400 Q 300 400 300 350 ";
+	-fx-background-color: black;
+}
+
+
+#buttonDiamondCenterDeck{
+	-fx-shape: "M 300 300 L 350 200 L 400 300 L 350 400 L 300 300 ";
+	-fx-background-color: red;
+}
+
+#buttonHeartArrowCenterDeck{
+	-fx-shape: "M 500 350 A 50 50 0 1 1 400 350 A 50 50 0 1 1 300 350 Q 300 250 400 200 Q 500 250 500 350 A 50 50 0 1 1 400 350 Q 400 450 450 450 L 350 450 Q 400 450 400 350 ";
+	-fx-background-color: black;
+}
+
+
+#buttonHeartCenterDeck1{
+	-fx-shape: "M 300 450 Q 200 400 200 300 A 50 50 0 1 1 300 300 A 50 50 0 1 1 400 300 Q 400 400 300 450 ";
+	-fx-background-color: red; 
+}
+
+#buttonLeafCenterDeck1{
+	-fx-shape: "M 300 300 A 50 50 0 1 1 300 300 A 50 50 0 1 1 300 300 A 50 50 0 1 1 300 200 A 50 50 0 1 1 300 300 L 300 300 A 50 50 0 1 1 300 350 A 50 50 0 1 1 300 300 Q 300 350 300 350 L 300 400 L 300 350 Q 300 400 350 400 L 250 400 Q 300 400 300 350 ";
+	-fx-background-color: black;
+}
+
+
+#buttonDiamondCenterDeck1{
+	-fx-shape: "M 300 300 L 350 200 L 400 300 L 350 400 L 300 300 ";
+	-fx-background-color: red;
+}
+
+#buttonHeartArrowCenterDeck1{
+	-fx-shape: "M 500 350 A 50 50 0 1 1 400 350 A 50 50 0 1 1 300 350 Q 300 250 400 200 Q 500 250 500 350 A 50 50 0 1 1 400 350 Q 400 450 450 450 L 350 450 Q 400 450 400 350 ";
+	-fx-background-color: black;
+}
